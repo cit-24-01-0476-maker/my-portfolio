@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavindu Oshadha | Server Master</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="preloader">
+        <div class="loader-logo">Oshadha<span>.X</span></div>
+    </div>
+
+    <a href="#" class="to-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <nav class="navbar">
+        <div class="logo">Oshadha<span>.X</span></div>
+        
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-item active">Home</a></li>
+            <li><a href="#services" class="nav-item">Services</a></li>
+            <li><a href="#gallery" class="nav-item">Gallery</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <a href="#contact" class="btn-nav">Contact</a>
+            <i class="fas fa-moon" id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; color: var(--text-dark);"></i>
+        </div>
+    </nav>
+
+    <section id="home" class="hero reveal">
+        <div class="profile-container">
+            <div class="img-ring"></div>
+            <img src="profile.jpg" class="img-main" alt="Real Photo">
+            <img src="avatar.jpg" class="img-swap" alt="Anime Avatar">
+        </div>
+
+        <div class="hero-content">
+            <div class="system-status-wrapper">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">All Systems Operational</span>
+                </div>
+            </div>
+
+            <h1>Server <span class="highlight-anim">Master</span> & <span class="txt-type" data-wait="3000" data-words='["Creator", "Developer", "Admin", "Designer"]'></span></h1>
+            
+            <h2 class="sub-headline">by Kavindu Oshadha</h2>
+            
+            <p>Undergraduate at SLTC. Founder of <strong>Oskaa Tech</strong>.<br>
+            I build High-Speed VPS Servers, 3X-UI Panels, and Premium Digital Content.</p>
+            
+            <div class="cta-group">
+                <a href="https://wa.me/94754565755" target="_blank" class="btn-orange shimmer-btn">
+                    Hire Me Now <i class="fas fa-paper-plane"></i>
+                </a>
+                <a href="https://oskaa.tech/" target="_blank" class="btn-white">
+                    Visit Oskaa Tech <i class="fas fa-store"></i>
+                </a>
+                <a href="https://github.com/cit-24-01-0476-maker" target="_blank" class="btn-white">
+                    View Code <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section reveal">
+        <div class="stat-box">
+            <h2 class="counter" data-target="150">0</h2>
+            <p>Oskaa Orders</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="counter" data-target="50">0</h2>
+            <p>VPS Setups</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="counter" data-target="100">0</h2>
+            <p>% Uptime</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="counter" data-target="25">0</h2>
+            <p>Happy Clients</p>
+        </div>
+    </section>
+
+    <div class="marquee-container reveal">
+        <div class="marquee-content">
+            <span><i class="fas fa-server"></i> VPS (SG/USA/IND)</span>
+            <span><i class="fas fa-network-wired"></i> 3X-UI Panel</span>
+            <span><i class="fas fa-film"></i> Video Editing</span>
+            <span><i class="fab fa-aws"></i> AWS Cloud</span>
+            <span><i class="fab fa-python"></i> Python</span>
+            <span><i class="fas fa-server"></i> VPS (SG/USA/IND)</span>
+            <span><i class="fas fa-network-wired"></i> 3X-UI Panel</span>
+            <span><i class="fas fa-film"></i> Video Editing</span>
+            <span><i class="fab fa-aws"></i> AWS Cloud</span>
+        </div>
+    </div>
+
+    <section id="services" class="section reveal">
+        <div class="section-header">
+            <h2>What I Do</h2>
+            <p>Server Management & Creative Media Solutions.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                <div class="card-icon"><i class="fas fa-globe-americas"></i></div>
+                <h3>VPS Server Creator</h3>
+                <p>I create and configure high-speed VPS servers in <strong>Singapore, USA, and India</strong>. Full setup with 3X-UI panels.</p>
+                <div class="tags">
+                    <span class="tag-highlight">🇸🇬 SG</span>
+                    <span class="tag-highlight">🇺🇸 USA</span>
+                    <span class="tag-highlight">🇮🇳 IND</span>
+                    <span>3X-UI</span>
+                </div>
+                <a href="https://wa.me/94754565755" class="link-arrow">Order Server ➔</a>
+            </div>
+
+            <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                <div class="card-icon"><i class="fas fa-video"></i></div>
+                <h3>Video Editing</h3>
+                <p>Creating engaging content for TikTok, Reels, and YouTube using professional editing workflows.</p>
+                <div class="tags">
+                    <span>CapCut</span>
+                    <span>Premiere</span>
+                    <span>Reels</span>
+                </div>
+                <a href="https://wa.me/94754565755" class="link-arrow">See Samples ➔</a>
+            </div>
+
+            <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
+                <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Canva & Branding</h3>
+                <p>Designing social media posts, banners, and logos that stand out. Fast and high-quality.</p>
+                <div class="tags">
+                    <span>Social Media</span>
+                    <span>Ads</span>
+                    <span>Logos</span>
+                </div>
+                <a href="https://wa.me/94754565755" class="link-arrow">Order Design ➔</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section reveal">
+        <div class="section-header">
+            <h2>Project Showcase</h2>
+            <p>A glimpse of my recent technical work.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card project-card" data-tilt data-tilt-scale="1.05">
+                <div class="img-wrapper">
+                    <img src="work-web.jpg" alt="Repo Website">
+                </div>
+                <h3>Repo & Web Project</h3>
+                <p>Custom built website deployed via GitHub pages with clean UI.</p>
+                <a href="#" class="link-arrow">View Project ➔</a>
+            </div>
+
+            <div class="card project-card" data-tilt data-tilt-scale="1.05">
+                <div class="img-wrapper">
+                    <img src="work-vps.jpg" alt="VPS Panel">
+                </div>
+                <h3>VPS & 3X-UI Panel</h3>
+                <p>High-performance Linux server setup with 3X-UI management panel.</p>
+                <a href="#" class="link-arrow">View Setup ➔</a>
+            </div>
+
+            <div class="card project-card" data-tilt data-tilt-scale="1.05">
+                <div class="img-wrapper">
+                    <img src="work-figma.jpg" alt="Figma UI">
+                </div>
+                <h3>Figma UI/UX Design</h3>
+                <p>Modern mobile and web interface designs focused on user experience.</p>
+                <a href="#" class="link-arrow">View Design ➔</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="ventures" class="section reveal">
+        <div class="section-header">
+            <h2>My Ventures</h2>
+            <p>Projects I own and manage.</p>
+        </div>
+        <div class="grid-container">
+            <div class="card" data-tilt>
+                <div class="card-tag">Business</div>
+                <h3>Oskaa Tech</h3>
+                <p>Fully automated VPN & software store designed and owned by me.</p>
+                <a href="https://oskaa.tech/" target="_blank" class="link-arrow">Visit Site ➔</a>
+            </div>
+            <div class="card" data-tilt>
+                <div class="card-tag">Code</div>
+                <h3>Cloud Scripts</h3>
+                <p>Open source contributions and automation scripts on GitHub.</p>
+                <a href="https://github.com/cit-24-01-0476-maker" target="_blank" class="link-arrow">View Code ➔</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="footer reveal">
+        <h2>Let's Work Together</h2>
+        <div class="social-icons">
+            <a href="https://wa.me/94754565755" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/kavindu-oshadha-perera/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:oshadhaperera500@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>© 2026 Kavindu Oshadha. All Rights Reserved.</p>
+    </section>
+
+    <a href="https://wa.me/94754565755" class="float-wa" target="_blank">
+        <i class="fab fa-whatsapp my-float"></i>
+    </a>
+
+    <script src="matrix.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.classList.remove('fa-moon');
+                themeToggle.classList.add('fa-sun');
+            } else {
+                themeToggle.classList.remove('fa-sun');
+                themeToggle.classList.add('fa-moon');
+            }
+        });
+
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 500);
+            }, 1500);
+        });
+
+        // Typewriter
+        class TypeWriter {
+            constructor(txtElement, words, wait = 3000) {
+                this.txtElement = txtElement;
+                this.words = words;
+                this.txt = '';
+                this.wordIndex = 0;
+                this.wait = parseInt(wait, 10);
+                this.type();
+                this.isDeleting = false;
+            }
+            type() {
+                const current = this.wordIndex % this.words.length;
+                const fullTxt = this.words[current];
+                if(this.isDeleting) { this.txt = fullTxt.substring(0, this.txt.length - 1); } 
+                else { this.txt = fullTxt.substring(0, this.txt.length + 1); }
+                this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
+                let typeSpeed = 100;
+                if(this.isDeleting) { typeSpeed /= 2; }
+                if(!this.isDeleting && this.txt === fullTxt) { typeSpeed = this.wait; this.isDeleting = true; } 
+                else if(this.isDeleting && this.txt === '') { this.isDeleting = false; this.wordIndex++; typeSpeed = 500; }
+                setTimeout(() => this.type(), typeSpeed);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', init);
+        function init() {
+            const txtElement = document.querySelector('.txt-type');
+            const words = JSON.parse(txtElement.getAttribute('data-words'));
+            const wait = txtElement.getAttribute('data-wait');
+            new TypeWriter(txtElement, words, wait);
+        }
+
+        // Stats
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+
+        // Particle Trail
+        document.addEventListener('mousemove', function(e) {
+            let particle = document.createElement('div');
+            particle.classList.add('cursor-particle');
+            particle.style.left = e.pageX + 'px';
+            particle.style.top = e.pageY + 'px';
+            document.body.appendChild(particle);
+            setTimeout(function() { particle.remove(); }, 500);
+        });
+
+        // Scroll & Back to Top & Spy & Progress Bar
+        const toTopBtn = document.querySelector(".to-top");
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('.nav-links li a');
+
+        window.addEventListener('scroll', () => {
+            // Progress Bar Logic
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + "%";
+
+            // Reveal Animation
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
+            }
+
+            // Back to Top Visibility
+            if (window.pageYOffset > 300) { toTopBtn.classList.add("active"); } 
+            else { toTopBtn.classList.remove("active"); }
+
+            // Scroll Spy
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        VanillaTilt.init(document.querySelectorAll(".card"), { max: 15, speed: 400, glare: true, "max-glare": 0.2 });
+    </script>
+</body>
+</html>
