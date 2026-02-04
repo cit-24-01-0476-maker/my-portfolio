@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kavindu Oshadha | Server Master</title>
     
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-weight=%22bold%22 fill=%22%23e64919%22 font-family=%22sans-serif%22>X</text></svg>">
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -235,45 +237,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <script>
-        // --- Scroll Progress Bar Logic ---
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + "%";
-
-            // Reveal Animation
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++) {
-                var windowheight = window.innerHeight;
-                var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 100;
-                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
-            }
-            
-            // Back to Top Logic
-            if (window.pageYOffset > 300) { document.querySelector(".to-top").classList.add("active"); } 
-            else { document.querySelector(".to-top").classList.remove("active"); }
-            
-            // Scroll Spy
-            const sections = document.querySelectorAll('section');
-            const navLi = document.querySelectorAll('.nav-links li a');
-            let current = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navLi.forEach(a => {
-                a.classList.remove('active');
-                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
-        });
-
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
@@ -355,6 +318,48 @@
             particle.style.top = e.pageY + 'px';
             document.body.appendChild(particle);
             setTimeout(function() { particle.remove(); }, 500);
+        });
+
+        // Scroll & Back to Top & Spy & Progress Bar
+        const toTopBtn = document.querySelector(".to-top");
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('.nav-links li a');
+
+        window.addEventListener('scroll', () => {
+            // Progress Bar Logic
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + "%";
+
+            // Reveal Animation
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
+            }
+            
+            // Back to Top Logic
+            if (window.pageYOffset > 300) { document.querySelector(".to-top").classList.add("active"); } 
+            else { document.querySelector(".to-top").classList.remove("active"); }
+            
+            // Scroll Spy
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
         });
 
         // Initialize Tilt
