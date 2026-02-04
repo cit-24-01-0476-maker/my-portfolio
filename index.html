@@ -13,14 +13,18 @@
 </head>
 <body>
 
+    <audio id="startup-sound" src="startup.mp3" preload="auto"></audio>
+
+    <div id="enter-screen">
+        <button id="enter-btn">INITIALIZE SYSTEM</button>
+    </div>
+
     <div id="preloader">
         <div class="speed-lines">
             <div class="line"></div><div class="line"></div><div class="line"></div>
             <div class="line"></div><div class="line"></div><div class="line"></div>
         </div>
-        
         <div class="loader-logo" data-text="Oshadha.X">Oshadha<span>.X</span></div>
-        
         <div class="flash-overlay"></div>
     </div>
 
@@ -39,13 +43,11 @@
 
     <nav class="navbar">
         <div class="logo">Oshadha<span>.X</span></div>
-        
         <ul class="nav-links">
             <li><a href="#home" class="nav-item active">Home</a></li>
             <li><a href="#services" class="nav-item">Services</a></li>
             <li><a href="#gallery" class="nav-item">Gallery</a></li>
         </ul>
-
         <div class="nav-right">
             <a href="#contact" class="btn-nav">Contact</a>
             <i class="fas fa-moon" id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; color: var(--text-dark);"></i>
@@ -78,11 +80,9 @@
                 <a href="https://wa.me/94754565755" target="_blank" class="btn-orange shimmer-btn">
                     Hire Me Now <i class="fas fa-paper-plane"></i>
                 </a>
-
                 <a href="cv.pdf" download="Kavindu_Oshadha_CV.pdf" class="btn-white">
                     Download CV <i class="fas fa-download"></i>
                 </a>
-
                 <a href="https://oskaa.tech/" target="_blank" class="btn-white">
                     Visit Oskaa Tech <i class="fas fa-store"></i>
                 </a>
@@ -131,7 +131,6 @@
             <h2>What I Do</h2>
             <p>Server Management & Creative Media Solutions.</p>
         </div>
-
         <div class="grid-container">
             <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
                 <div class="card-icon"><i class="fas fa-globe-americas"></i></div>
@@ -145,7 +144,6 @@
                 </div>
                 <a href="https://wa.me/94754565755" class="link-arrow">Order Server ➔</a>
             </div>
-
             <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
                 <div class="card-icon"><i class="fas fa-video"></i></div>
                 <h3>Video Editing</h3>
@@ -157,7 +155,6 @@
                 </div>
                 <a href="https://wa.me/94754565755" class="link-arrow">See Samples ➔</a>
             </div>
-
             <div class="card" data-tilt data-tilt-glare data-tilt-max-glare="0.2">
                 <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
                 <h3>Canva & Branding</h3>
@@ -177,7 +174,6 @@
             <h2>Project Showcase</h2>
             <p>A glimpse of my recent technical work.</p>
         </div>
-
         <div class="grid-container">
             <div class="card project-card" data-tilt data-tilt-scale="1.05">
                 <div class="img-wrapper">
@@ -187,7 +183,6 @@
                 <p>Custom built website deployed via GitHub pages with clean UI.</p>
                 <a href="#" class="link-arrow">View Project ➔</a>
             </div>
-
             <div class="card project-card" data-tilt data-tilt-scale="1.05">
                 <div class="img-wrapper">
                     <img src="work-vps.jpg" alt="VPS Panel">
@@ -196,7 +191,6 @@
                 <p>High-performance Linux server setup with 3X-UI management panel.</p>
                 <a href="#" class="link-arrow">View Setup ➔</a>
             </div>
-
             <div class="card project-card" data-tilt data-tilt-scale="1.05">
                 <div class="img-wrapper">
                     <img src="work-figma.jpg" alt="Figma UI">
@@ -247,7 +241,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <script>
-        // --- 1. Dynamic Title Change (Hacker Style) ---
+        // --- 1. ENTER BUTTON LOGIC (Guaranteed Sound) ---
+        const enterScreen = document.getElementById('enter-screen');
+        const enterBtn = document.getElementById('enter-btn');
+        const preloader = document.getElementById('preloader');
+        const sound = document.getElementById('startup-sound');
+
+        enterBtn.addEventListener('click', () => {
+            // 1. Play Sound
+            if(sound) {
+                sound.volume = 0.6;
+                sound.play();
+            }
+
+            // 2. Hide Enter Screen
+            enterScreen.style.opacity = '0';
+            setTimeout(() => { enterScreen.style.display = 'none'; }, 500);
+
+            // 3. Show Preloader & Start Animation
+            preloader.style.opacity = '1';
+            preloader.style.visibility = 'visible';
+
+            // 4. Run Flash & Reveal Site after 2 seconds
+            setTimeout(() => {
+                preloader.classList.add('flash-out');
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden'; 
+                }, 500); 
+            }, 2000);
+        });
+
+        // --- 2. Dynamic Title Change ---
         let docTitle = document.title;
         window.addEventListener("blur", () => {
             document.title = "⚠️ Connection Lost | Come Back!";
@@ -256,58 +281,29 @@
             document.title = docTitle;
         });
 
-        // --- 2. Secret Hacker Console Message ---
-        console.log(
-            "%c STOP! SYSTEM SECURE. 🔒 ", 
-            "color: white; background: #e64919; font-size: 25px; padding: 10px; border-radius: 5px; font-weight: bold;"
-        );
-        console.log(
-            "%c Designed & Developed by Kavindu Oshadha.X ", 
-            "color: #00f2ff; font-size: 15px; font-family: monospace;"
-        );
+        // --- 3. Hacker Console Message ---
+        console.log("%c STOP! SYSTEM SECURE. 🔒 ", "color: white; background: #e64919; font-size: 25px; padding: 10px; border-radius: 5px; font-weight: bold;");
+        console.log("%c Designed & Developed by Kavindu Oshadha.X ", "color: #00f2ff; font-size: 15px; font-family: monospace;");
 
-        // --- 3. Preloader (Updated with Flash Effect) ---
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            // Add 'flash-out' class just before hiding to trigger the flash
-            setTimeout(() => {
-                preloader.classList.add('flash-out');
-                // After flash animation, hide the preloader
-                setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    preloader.style.visibility = 'hidden'; 
-                }, 500); 
-            }, 2000); // 2 seconds display time
-        });
-
-        // --- 4. Magic Cursor & Particle Trail Logic ---
+        // --- 4. Magic Cursor & Particle Trail ---
         const cursorDot = document.querySelector('[data-cursor-dot]');
         const cursorOutline = document.querySelector('[data-cursor-outline]');
         
         window.addEventListener('mousemove', function(e) {
             const posX = e.clientX;
             const posY = e.clientY;
-
-            // Move Cursor Target
             cursorDot.style.left = `${posX}px`;
             cursorDot.style.top = `${posY}px`;
-            
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
 
-            // Create Particle Trail (Falling Dots)
             let particle = document.createElement('div');
             particle.classList.add('cursor-particle');
             particle.style.left = posX + 'px';
             particle.style.top = posY + 'px';
             document.body.appendChild(particle);
-            
             setTimeout(function() { particle.remove(); }, 800);
         });
 
-        // Hover Effect Logic
         document.addEventListener('mouseover', (e) => {
             if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.card') || e.target.closest('.theme-toggle')) {
                 document.body.classList.add('hovering');
@@ -316,34 +312,29 @@
             }
         });
 
-        // --- Scroll Progress Bar Logic ---
+        // --- 5. Scroll Progress & Animations ---
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (scrollTop / scrollHeight) * 100;
             document.getElementById('progress-bar').style.width = scrolled + "%";
 
-            // Reveal Animation
             var reveals = document.querySelectorAll('.reveal');
             for(var i = 0; i < reveals.length; i++) {
                 var windowheight = window.innerHeight;
                 var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 100;
-                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
+                if(revealtop < windowheight - 100) { reveals[i].classList.add('active'); }
             }
             
-            // Back to Top Logic
             if (window.pageYOffset > 300) { document.querySelector(".to-top").classList.add("active"); } 
             else { document.querySelector(".to-top").classList.remove("active"); }
             
-            // Scroll Spy
             const sections = document.querySelectorAll('section');
             const navLi = document.querySelectorAll('.nav-links li a');
             let current = "";
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                if (pageYOffset >= (sectionTop - section.clientHeight / 3)) {
                     current = section.getAttribute('id');
                 }
             });
@@ -369,7 +360,7 @@
             }
         });
 
-        // Typewriter
+        // Typewriter & Stats Code (No Changes)
         class TypeWriter {
             constructor(txtElement, words, wait = 3000) {
                 this.txtElement = txtElement;
@@ -401,7 +392,6 @@
             new TypeWriter(txtElement, words, wait);
         }
 
-        // Stats
         const counters = document.querySelectorAll('.counter');
         const speed = 200;
         counters.forEach(counter => {
@@ -419,7 +409,6 @@
             updateCount();
         });
 
-        // Initialize Tilt
         VanillaTilt.init(document.querySelectorAll(".card"), { max: 15, speed: 400, glare: true, "max-glare": 0.2 });
     </script>
 </body>
