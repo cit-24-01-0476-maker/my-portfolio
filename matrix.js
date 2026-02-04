@@ -16,19 +16,16 @@ for (let x = 0; x < columns; x++) {
 }
 
 function draw() {
-    // Check if Dark Mode is active on Body
     const isDarkMode = document.body.classList.contains('dark-mode');
 
     if (isDarkMode) {
-        // --- DARK MODE MATRIX (Orange) ---
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#e64919'; /* Orange Matrix */
+        ctx.fillStyle = '#e64919'; /* Orange */
     } else {
-        // --- LIGHT MODE MATRIX (Gray) ---
         ctx.fillStyle = 'rgba(242, 242, 244, 0.15)'; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#a0a0a0'; /* Gray Matrix */
+        ctx.fillStyle = '#a0a0a0'; /* Gray */
     }
 
     ctx.font = 'bold ' + fontSize + 'px monospace';
