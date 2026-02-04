@@ -21,12 +21,59 @@ html { scroll-behavior: smooth; }
 ::-webkit-scrollbar-thumb { background: var(--accent-orange); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: #c53e15; }
 
+/* --- MAGIC CURSOR & PARTICLE STYLES --- */
 body {
     background-color: var(--bg-color);
     color: var(--text-dark);
     font-family: var(--font-body);
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: none; /* Hide default cursor */
+}
+
+/* Center Dot */
+.cursor-dot {
+    width: 5px; height: 5px; background-color: var(--accent-orange);
+    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+    border-radius: 50%; z-index: 9999; pointer-events: none;
+}
+
+/* Outer Circle */
+.cursor-outline {
+    width: 30px; height: 30px;
+    border: 2px solid var(--accent-orange);
+    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+    border-radius: 50%; z-index: 9998; pointer-events: none;
+    transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.1s; 
+}
+
+/* Particle Trail (Falling Dots) */
+.cursor-particle {
+    position: absolute; width: 6px; height: 6px; 
+    background: var(--accent-orange);
+    border-radius: 50%; pointer-events: none; 
+    transform: translate(-50%, -50%);
+    animation: fadeOut 0.8s linear forwards; 
+    z-index: 9997;
+}
+
+@keyframes fadeOut { 
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 
+    100% { transform: translate(-50%, 20px) scale(0); opacity: 0; } 
+}
+
+/* Hover Effect */
+body.hovering .cursor-outline {
+    width: 60px; height: 60px;
+    background-color: rgba(230, 73, 25, 0.1);
+    border-color: transparent;
+}
+body.hovering .cursor-dot { transform: translate(-50%, -50%) scale(1.5); }
+
+/* Hide on Mobile */
+@media (max-width: 768px) {
+    body { cursor: auto; }
+    .cursor-dot, .cursor-outline, .cursor-particle { display: none; }
 }
 
 /* Dark Mode Overrides */
@@ -81,9 +128,9 @@ body.dark-mode {
 }
 body.dark-mode .navbar { background: rgba(5, 5, 5, 0.8); border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-/* Logo Glitch Effect */
+/* Logo Styling */
 .logo { font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; color: var(--text-dark); z-index: 2; position: relative; display: inline-block; }
-.logo span { color: var(--accent-orange); }
+.logo span { color: var(--accent-orange); } 
 .logo:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; color: var(--accent-orange); }
 .logo:hover span { color: var(--text-dark); }
 body.dark-mode .logo:hover span { color: #fff; }
@@ -125,25 +172,17 @@ body.dark-mode .logo:hover span { color: #fff; }
 @keyframes blink { 0% { opacity: 0.5; } 50% { opacity: 1; box-shadow: 0 0 8px #25d366; } 100% { opacity: 0.5; } }
 
 .profile-container { position: relative; width: 200px; height: 200px; margin-bottom: 30px; }
-
-/* 3D Ice Blue Ring */
 .img-ring { 
     position: absolute; width: 100%; height: 100%; border-radius: 50%; 
-    border: 3px solid transparent; border-top: 3px solid #00f2ff; border-bottom: 3px solid #00f2ff;
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.6); animation: spin 8s linear infinite; z-index: 10; 
+    border: 3px dashed var(--accent-orange);
+    box-shadow: 0 0 20px rgba(230, 73, 25, 0.4);
+    animation: spin 20s linear infinite; z-index: 10; 
 }
-.img-ring::before {
-    content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-    border-radius: 50%; border: 3px solid transparent; border-left: 3px solid #00f2ff; border-right: 3px solid #00f2ff;
-    animation: spinReverse 12s linear infinite;
-}
-
 .profile-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: top; border: 4px solid var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: absolute; top: 0; left: 0; }
 .img-main { z-index: 1; }
 .img-swap { z-index: 2; animation: imageFade 6s infinite ease-in-out; }
 @keyframes imageFade { 0%, 45% { opacity: 0; } 50%, 95% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes spin { 100% { transform: rotate(360deg); } }
-@keyframes spinReverse { 100% { transform: rotate(-360deg); } }
 
 .hero h1 { font-family: var(--font-head); font-size: 4.5rem; line-height: 1; margin-bottom: 10px; color: var(--text-dark); }
 .highlight-anim {
@@ -202,27 +241,10 @@ body.dark-mode .section { background: #0a0a0a; }
 .section-header p { color: var(--text-gray); }
 
 .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-/* Updated Card Styles for Glowing Border */
-.card {
-    background: #f9f9f9; padding: 30px; border-radius: 20px; transition: 0.3s; 
-    border: 1px solid transparent; /* Base border */
-    transform-style: preserve-3d; transform: perspective(1000px);
-}
-body.dark-mode .card { 
-    background: #111; 
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle dark mode border */
-}
-
-.card:hover {
-    background: #fff; border-color: var(--accent-orange);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-body.dark-mode .card:hover { 
-    background: #1a1a1a; 
-    border-color: var(--accent-orange);
-    box-shadow: 0 10px 40px -10px rgba(230, 73, 25, 0.3); /* Premium Glow in Dark Mode */
-}
+.card { background: #f9f9f9; padding: 30px; border-radius: 20px; transition: 0.3s; border: 1px solid transparent; transform-style: preserve-3d; transform: perspective(1000px); }
+body.dark-mode .card { background: #111; border: 1px solid rgba(255, 255, 255, 0.1); }
+.card:hover { background: #fff; border-color: var(--accent-orange); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+body.dark-mode .card:hover { background: #1a1a1a; border-color: var(--accent-orange); box-shadow: 0 10px 40px -10px rgba(230, 73, 25, 0.3); }
 
 .card-icon { font-size: 2.5rem; color: var(--accent-orange); margin-bottom: 20px; transform: translateZ(20px); }
 .card h3 { font-size: 1.5rem; margin-bottom: 10px; font-family: var(--font-head); transform: translateZ(20px); color: var(--text-dark); }
@@ -232,12 +254,9 @@ body.dark-mode .card:hover {
 .tags { margin-bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap; transform: translateZ(20px); }
 .tags span { background: #eee; color: var(--text-gray); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
 body.dark-mode .tags span { background: #222; }
-
 .tag-highlight { border: 1px solid var(--accent-orange); color: var(--accent-orange) !important; background: #fff !important; }
 body.dark-mode .tag-highlight { background: #1a1a1a !important; }
-
 .card-tag { font-size: 0.8rem; font-weight: 700; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-
 .img-wrapper { width: 100%; height: 200px; border-radius: 10px; overflow: hidden; margin-bottom: 20px; border: 1px solid #ddd; transform: translateZ(20px); }
 body.dark-mode .img-wrapper { border-color: #333; }
 .img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
@@ -256,18 +275,10 @@ body.dark-mode .footer { background: #0a0a0a; }
 .reveal { position: relative; transform: translateY(50px); opacity: 0; transition: all 0.8s ease; }
 .reveal.active { transform: translateY(0); opacity: 1; }
 
-/* Particle Trail */
-.cursor-particle {
-    position: absolute; width: 8px; height: 8px; background: var(--accent-orange);
-    border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%);
-    animation: fadeOut 0.5s linear;
-}
-@keyframes fadeOut { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; } }
-
 /* Mobile Tweaks */
 @media (max-width: 768px) {
     .hero h1 { font-size: 3rem; }
-    .nav-links { display: none; } /* Hide on Mobile */
+    .nav-links { display: none; }
     .system-status-wrapper { display: none; }
     .cta-group { flex-direction: column; }
     .btn-orange, .btn-white { width: 100%; text-align: center; }
@@ -275,6 +286,6 @@ body.dark-mode .footer { background: #0a0a0a; }
     .stats-section { gap: 30px; }
     .stat-box { width: 45%; }
     .float-wa { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
-    .cursor-particle { display: none; }
+    .cursor-dot, .cursor-outline, .cursor-particle { display: none; }
     .to-top { right: 20px; bottom: 80px; }
 }
