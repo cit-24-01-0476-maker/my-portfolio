@@ -21,11 +21,11 @@ function draw() {
     if (isDarkMode) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#e64919'; /* Orange */
+        ctx.fillStyle = '#e64919';
     } else {
         ctx.fillStyle = 'rgba(242, 242, 244, 0.15)'; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#a0a0a0'; /* Gray */
+        ctx.fillStyle = '#a0a0a0'; 
     }
 
     ctx.font = 'bold ' + fontSize + 'px monospace';
