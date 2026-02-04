@@ -13,6 +13,9 @@
 </head>
 <body>
 
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
     <div id="progress-container">
         <div id="progress-bar"></div>
     </div>
@@ -237,6 +240,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <script>
+        // --- Magic Cursor & Particle Trail Logic ---
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // 1. Move Magic Cursor
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+
+            // 2. Create Particle Trail (Falling Dots)
+            let particle = document.createElement('div');
+            particle.classList.add('cursor-particle');
+            particle.style.left = posX + 'px';
+            particle.style.top = posY + 'px';
+            document.body.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(function() { particle.remove(); }, 800);
+        });
+
+        // Hover Effect Logic
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.card') || e.target.closest('.theme-toggle')) {
+                document.body.classList.add('hovering');
+            } else {
+                document.body.classList.remove('hovering');
+            }
+        });
+
+        // --- Scroll Progress Bar Logic ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + "%";
+
+            // Reveal Animation
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
+            }
+            
+            // Back to Top Logic
+            if (window.pageYOffset > 300) { document.querySelector(".to-top").classList.add("active"); } 
+            else { document.querySelector(".to-top").classList.remove("active"); }
+            
+            // Scroll Spy
+            const sections = document.querySelectorAll('section');
+            const navLi = document.querySelectorAll('.nav-links li a');
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
@@ -308,58 +387,6 @@
                 }
             };
             updateCount();
-        });
-
-        // Particle Trail
-        document.addEventListener('mousemove', function(e) {
-            let particle = document.createElement('div');
-            particle.classList.add('cursor-particle');
-            particle.style.left = e.pageX + 'px';
-            particle.style.top = e.pageY + 'px';
-            document.body.appendChild(particle);
-            setTimeout(function() { particle.remove(); }, 500);
-        });
-
-        // Scroll & Back to Top & Spy & Progress Bar
-        const toTopBtn = document.querySelector(".to-top");
-        const sections = document.querySelectorAll('section');
-        const navLi = document.querySelectorAll('.nav-links li a');
-
-        window.addEventListener('scroll', () => {
-            // Progress Bar Logic
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + "%";
-
-            // Reveal Animation
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++) {
-                var windowheight = window.innerHeight;
-                var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 100;
-                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
-            }
-            
-            // Back to Top Logic
-            if (window.pageYOffset > 300) { document.querySelector(".to-top").classList.add("active"); } 
-            else { document.querySelector(".to-top").classList.remove("active"); }
-            
-            // Scroll Spy
-            let current = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navLi.forEach(a => {
-                a.classList.remove('active');
-                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
         });
 
         // Initialize Tilt
