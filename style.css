@@ -56,7 +56,6 @@ body {
     animation: fadeOut 0.8s linear forwards; 
     z-index: 9997;
 }
-
 @keyframes fadeOut { 
     0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 
     100% { transform: translate(-50%, 20px) scale(0); opacity: 0; } 
@@ -65,12 +64,11 @@ body {
 /* Hover Effect */
 body.hovering .cursor-outline {
     width: 60px; height: 60px;
-    background-color: rgba(230, 73, 25, 0.1);
-    border-color: transparent;
+    background-color: rgba(230, 73, 25, 0.1); border-color: transparent;
 }
 body.hovering .cursor-dot { transform: translate(-50%, -50%) scale(1.5); }
 
-/* Hide on Mobile */
+/* Hide Custom Cursor on Mobile */
 @media (max-width: 768px) {
     body { cursor: auto; }
     .cursor-dot, .cursor-outline, .cursor-particle { display: none; }
@@ -93,19 +91,77 @@ body.dark-mode {
     box-shadow: 0 0 10px var(--accent-orange); transition: width 0.1s;
 }
 
-/* --- Preloader --- */
+/* --- Preloader (High-Speed Cyber Entry) --- */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--bg-color); z-index: 10000;
-    display: flex; justify-content: center; align-items: center;
-    transition: opacity 0.5s ease;
+    background: #050505; z-index: 10000; display: flex; justify-content: center; align-items: center;
+    overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+
+/* 1. Glitching Logo */
 .loader-logo {
-    font-family: var(--font-head); font-size: 3rem; font-weight: 700;
-    color: var(--text-dark); animation: pulse 1.5s infinite;
+    font-family: var(--font-head); font-size: 4rem; font-weight: 700;
+    color: var(--white); position: relative; z-index: 2;
+    animation: glitch-skew 1s infinite linear alternate-reverse;
 }
 .loader-logo span { color: var(--accent-orange); }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+/* Glitch Layers */
+.loader-logo::before, .loader-logo::after {
+    content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #050505; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.loader-logo::before {
+    left: -2px; text-shadow: 2px 0 var(--accent-orange);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+.loader-logo::after {
+    left: 2px; text-shadow: -2px 0 #00f2ff; animation: glitch-anim 2s infinite linear alternate-reverse; animation-delay: -1s;
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(80% 0 0 0); transform: translate(-2px, 2px); }
+    20% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -2px); }
+    40% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+    60% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -2px); }
+    80% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 2px); }
+    100% { clip-path: inset(90% 0 0 0); transform: translate(2px, -2px); }
+}
+@keyframes glitch-skew {
+    0% { transform: skew(0deg); } 20% { transform: skew(2deg); } 40% { transform: skew(-2deg); }
+    60% { transform: skew(1deg); } 80% { transform: skew(-1deg); } 100% { transform: skew(0deg); }
+}
+
+/* 2. Speed Lines Effect */
+.speed-lines {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1; perspective: 1000px;
+}
+.line {
+    position: absolute; width: 2px; height: 200%; background: var(--accent-orange);
+    top: -50%; left: 50%; opacity: 0; box-shadow: 0 0 10px var(--accent-orange);
+    animation: speed 0.8s linear infinite;
+}
+.line:nth-child(1) { left: 10%; animation-delay: 0s; }
+.line:nth-child(2) { left: 30%; animation-delay: 0.2s; }
+.line:nth-child(3) { left: 50%; animation-delay: 0.4s; }
+.line:nth-child(4) { left: 70%; animation-delay: 0.1s; }
+.line:nth-child(5) { left: 90%; animation-delay: 0.3s; }
+.line:nth-child(6) { left: 20%; animation-delay: 0.5s; }
+
+@keyframes speed {
+    0% { transform: translateY(-100%) rotateX(45deg); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(100%) rotateX(45deg); opacity: 0; }
+}
+
+/* 3. Flash Overlay */
+.flash-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--accent-orange); opacity: 0; z-index: 3; pointer-events: none;
+}
+#preloader.flash-out .flash-overlay { animation: flash 0.5s ease-out forwards; }
+@keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
 
 /* --- Back to Top --- */
 .to-top {
@@ -134,15 +190,6 @@ body.dark-mode .navbar { background: rgba(5, 5, 5, 0.8); border-bottom: 1px soli
 .logo:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; color: var(--accent-orange); }
 .logo:hover span { color: var(--text-dark); }
 body.dark-mode .logo:hover span { color: #fff; }
-
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
-}
 
 .nav-links { 
     display: flex; gap: 30px; list-style: none; 
@@ -288,4 +335,6 @@ body.dark-mode .footer { background: #0a0a0a; }
     .float-wa { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 25px; }
     .cursor-dot, .cursor-outline, .cursor-particle { display: none; }
     .to-top { right: 20px; bottom: 80px; }
+    .loader-logo { font-size: 2.5rem; }
 }
+
