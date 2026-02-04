@@ -66,6 +66,11 @@
                 <a href="https://wa.me/94754565755" target="_blank" class="btn-orange shimmer-btn">
                     Hire Me Now <i class="fas fa-paper-plane"></i>
                 </a>
+
+                <a href="cv.pdf" download class="btn-white">
+                    Download CV <i class="fas fa-download"></i>
+                </a>
+
                 <a href="https://oskaa.tech/" target="_blank" class="btn-white">
                     Visit Oskaa Tech <i class="fas fa-store"></i>
                 </a>
@@ -230,6 +235,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <script>
+        // --- NEW: Scroll Progress Bar Logic ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + "%";
+
+            // Reveal Animation
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
+            }
+            
+            // Back to Top Logic
+            if (window.pageYOffset > 300) { document.querySelector(".to-top").classList.add("active"); } 
+            else { document.querySelector(".to-top").classList.remove("active"); }
+            
+            // Scroll Spy
+            const sections = document.querySelectorAll('section');
+            const navLi = document.querySelectorAll('.nav-links li a');
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
@@ -313,49 +357,7 @@
             setTimeout(function() { particle.remove(); }, 500);
         });
 
-        // Scroll & Back to Top & Spy & Progress Bar
-        const toTopBtn = document.querySelector(".to-top");
-        const sections = document.querySelectorAll('section');
-        const navLi = document.querySelectorAll('.nav-links li a');
-
-        window.addEventListener('scroll', () => {
-            // Progress Bar Logic
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + "%";
-
-            // Reveal Animation
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++) {
-                var windowheight = window.innerHeight;
-                var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 100;
-                if(revealtop < windowheight - revealpoint) { reveals[i].classList.add('active'); }
-            }
-
-            // Back to Top Visibility
-            if (window.pageYOffset > 300) { toTopBtn.classList.add("active"); } 
-            else { toTopBtn.classList.remove("active"); }
-
-            // Scroll Spy
-            let current = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLi.forEach(a => {
-                a.classList.remove('active');
-                if (a.classList.contains('nav-item') && a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
-        });
-
+        // Initialize Tilt
         VanillaTilt.init(document.querySelectorAll(".card"), { max: 15, speed: 400, glare: true, "max-glare": 0.2 });
     </script>
 </body>
